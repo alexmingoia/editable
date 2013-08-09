@@ -3,6 +3,8 @@
 
   component for simple inline editing
 
+  [demo](http://chemzqm.github.io/editable/)
+
 ## Installation
 
   Install with [component(1)](http://component.io):
