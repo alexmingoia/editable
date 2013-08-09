@@ -50,7 +50,9 @@ Editable.prototype.confirm = function() {
 
 Editable.prototype.remove = function() {
   this.emit('remove');
-  this.cancel();
+  if (this.hide === false) {
+    this.cancel();
+  }
   this.node.off('click', this._click);
 }
 
