@@ -25,23 +25,22 @@ Editable.prototype.click = function() {
   this.input.get(0).focus();
   var self = this;
   this._cancel = function() {
-    setTimeout(self.cancel(), 50);
+    setTimeout(self.cancel.bind(self), 100);
   };
   this._confirm = this.confirm.bind(this);
   this._onkeydown = this.onkeydown.bind(this);
   this.input.on('keydown', this._onkeydown);
   this.input.on('blur', this._cancel);
   el.find('.confirm').on('click', this._confirm);
-  el.find('.cancel').on('click', this._cancel);
 }
 
 Editable.prototype.cancel = function() {
+  if (this.hide) return;
   this.hide = true;
   this.emit('hide');
   this.input.off('blur', this._cancel);
   this.input.off('keydown', this._onkeydown);
   this.el.find('.confirm').off('click', this._confirm);
-  this.el.find('.cancel').off('click', this._cancel);
   this.el.remove();
   this.node.css('display', this.display);
 }
@@ -49,7 +48,6 @@ Editable.prototype.cancel = function() {
 Editable.prototype.confirm = function() {
   var v = this.input.value();
   this.node.html(v);
-  this.cancel();
   this.emit('change', v);
 }
 
@@ -58,13 +56,15 @@ Editable.prototype.remove = function() {
   if (this.hide === false) {
     this.cancel();
   }
+  this.off();
   this.node.off('click', this._click);
 }
 
 Editable.prototype.onkeydown = function(e) {
   switch(keyname(e.which)) {
     case 'enter':
-      return this.confirm();
+      this.confirm();
+      return this.cancel();
     case 'esc':
       return this.cancel();
   }
