@@ -27,6 +27,7 @@ Editable.prototype.click = function() {
   this._confirm = this.confirm.bind(this);
   this._onkeydown = this.onkeydown.bind(this);
   this.input.on('keydown', this._onkeydown);
+  this.input.on('blur', this._cancel);
   el.find('.confirm').on('click', this._confirm);
   el.find('.cancel').on('click', this._cancel);
 }
@@ -34,6 +35,7 @@ Editable.prototype.click = function() {
 Editable.prototype.cancel = function() {
   this.hide = true;
   this.emit('hide');
+  this.input.off('blur', this._cancel);
   this.input.off('keydown', this._onkeydown);
   this.el.find('.confirm').off('click', this._confirm);
   this.el.find('.cancel').off('click', this._cancel);
