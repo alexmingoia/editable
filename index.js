@@ -23,7 +23,10 @@ Editable.prototype.click = function() {
   this.node.css('display', 'none');
   el.insertAfter(this.node);
   this.input.get(0).focus();
-  this._cancel = this.cancel.bind(this);
+  var self = this;
+  this._cancel = function() {
+    setTimeout(self.cancel(), 50);
+  };
   this._confirm = this.confirm.bind(this);
   this._onkeydown = this.onkeydown.bind(this);
   this.input.on('keydown', this._onkeydown);
@@ -44,9 +47,9 @@ Editable.prototype.cancel = function() {
 }
 
 Editable.prototype.confirm = function() {
-  this.cancel();
   var v = this.input.value();
   this.node.html(v);
+  this.cancel();
   this.emit('change', v);
 }
 
