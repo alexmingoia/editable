@@ -75,14 +75,28 @@
   </head>
   <body>
     <span id="test">click me</span>
+    <div>
+    <button class="btn" id="reset">reset</button>
+    <button class="btn" id="value">value</button>
+    </div>
 
     <script>
       var Editable = require('editable');
       var node = document.getElementById('test');
       var ed = new Editable(node);
+      ed.limit(1, 10);
       ed.on('change', function(v){
         console.log(v);
       })
+      var reset = document.getElementById('reset');
+      reset.addEventListener('click', function(){
+        ed.reset();
+      });
+      var value = document.getElementById('value');
+      value.addEventListener('click', function(){
+          var v = ed.value();
+          console.log(v);
+      });
     </script>
   </body>
 </html>

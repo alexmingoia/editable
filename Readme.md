@@ -29,7 +29,20 @@ ed.on('change', function(v){
 
 Create Editable instance
 
-### editable#remove
+### editable#limit(min, max)
+
+`min` {Number}, `max` {Number} limit the length.
+
+### editable#value()
+
+Get current node html.
+
+### editable#reset()
+
+Reset the value to previous, useful for undo no `change` event emitted.
+
+### editable#remove()
+
 
 Unregist the events
 
