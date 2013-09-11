@@ -52,6 +52,7 @@ Editable.prototype.limit = function(min, max) {
 
 Editable.prototype.documentClick = function(e) {
   var target = e.target;
+  if (target == this.input.get(0)) return;
   if (target == this.node.get(0)) return;
   if (target == this.confirmBtn) {
     return this.confirm();
@@ -74,7 +75,9 @@ Editable.prototype.confirm = function() {
   if (typeof this.min !== 'undefined') {
     var len = v.length;
     if (len < this.min || len > this.max) {
-      return this.cancel();
+      this.input.get(0).focus();
+      this.emit('range error', v);
+      return
     }
   }
   this.node.html(v);

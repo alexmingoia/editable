@@ -22,6 +22,11 @@ ed.on('change', function(v){
   console.log(v);
 })
 ```
+## Events
+
+* `change` emit with the changed value.
+
+* `range error` emit when the value length is not in limited range.
 
 ## API
 

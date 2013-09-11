@@ -71,6 +71,10 @@
         -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
         box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
       }
+      body #notifications {
+        left: 15px;
+        right: auto;
+      }
     </style>
   </head>
   <body>
@@ -82,11 +86,15 @@
 
     <script>
       var Editable = require('editable');
+      var notify = require('notification');
       var node = document.getElementById('test');
       var ed = new Editable(node);
       ed.limit(1, 10);
       ed.on('change', function(v){
-        console.log(v);
+        notify(v);
+      })
+      ed.on('range error', function(v){
+        notify('Range error');
       })
       var reset = document.getElementById('reset');
       reset.addEventListener('click', function(){
@@ -94,8 +102,8 @@
       });
       var value = document.getElementById('value');
       value.addEventListener('click', function(){
-          var v = ed.value();
-          console.log(v);
+        var v = ed.value();
+        notify(v);
       });
     </script>
   </body>
