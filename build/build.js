@@ -321,8 +321,11 @@ exports.unbind = function(el, type, fn, capture){\n\
 //@ sourceURL=component-delegate/index.js"
 ));
 require.register("component-indexof/index.js", Function("exports, require, module",
-"module.exports = function(arr, obj){\n\
-  if (arr.indexOf) return arr.indexOf(obj);\n\
+"\n\
+var indexOf = [].indexOf;\n\
+\n\
+module.exports = function(arr, obj){\n\
+  if (indexOf) return arr.indexOf(obj);\n\
   for (var i = 0; i < arr.length; ++i) {\n\
     if (arr[i] === obj) return i;\n\
   }\n\
