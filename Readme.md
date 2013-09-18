@@ -51,10 +51,6 @@ Reset the value to previous, useful for undo no `change` event emitted.
 
 Unregist the events
 
-### Event#change
-
-Emit the `change` event with the changed `value` of input
-
 ## License
 
   MIT
