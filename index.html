@@ -91,10 +91,10 @@
       var ed = new Editable(node);
       ed.limit(1, 10);
       ed.on('change', function(v){
-        notify(v);
+        notify(v).closable();
       })
       ed.on('range error', function(v){
-        notify('Range error');
+        notify('Range error').closable();
       })
       var reset = document.getElementById('reset');
       reset.addEventListener('click', function(){

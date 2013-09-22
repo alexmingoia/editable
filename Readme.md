@@ -1,6 +1,6 @@
 # editable
 
-  component for simple inline editing
+  Simple and tiny Edit in place for component
 
   With key bindings, `esc` for cancel `enter` for confirm
 
@@ -36,7 +36,7 @@ Create Editable instance
 
 ### editable#limit(min, max)
 
-`min` {Number}, `max` {Number} limit the length.
+`min` number, `max` number of the value length.
 
 ### editable#value()
 

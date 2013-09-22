@@ -4,7 +4,14 @@ var template = require('./template');
 var keyname = require ('keyname');
 
 
+/**
+ * Editable constructor
+ *
+ * @param {String} node target element
+ * @api public
+ */
 function Editable(node){
+  if (!(this instanceof Editable)) return new Editable(selector);
   this.node = dom(node);
   this.display = this.node.css('display');
   this._click = this.click.bind(this);
@@ -40,11 +47,24 @@ Editable.prototype.reset = function() {
   this.node.html(v);
 }
 
+/**
+ * Get current value
+ *
+ * @api public
+ */
 Editable.prototype.value = function() {
   var v = this.node.html();
   return v;
 }
 
+
+/**
+ * limit the character count
+ *
+ * @param {String} min minimal character count
+ * @param {String} max [optional] max character count
+ * @api public
+ */
 Editable.prototype.limit = function(min, max) {
   this.min = min;
   this.max = max || 200;
@@ -85,6 +105,10 @@ Editable.prototype.confirm = function() {
   this.cancel();
 }
 
+/**
+ * destroy the Editable instance
+ * @api public
+ */
 Editable.prototype.remove = function() {
   this.emit('remove');
   if (this.hide === false) {
